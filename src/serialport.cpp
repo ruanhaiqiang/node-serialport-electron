@@ -236,9 +236,10 @@ void EIO_AfterUpdate(uv_work_t* req) {
     delete data->errorCallback;
     delete data->disconnectedCallback;
   } else {
-    argv[0] = Nan::Undefined();
+    argv[0] = Nan::Null();
     argv[1] = Nan::New<v8::Int32>(data->result);
 
+    // TODO figure out if this is a bug
     int fd = argv[1]->ToInt32()->Int32Value();
     newQForFD(fd);
 

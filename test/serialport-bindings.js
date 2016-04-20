@@ -52,4 +52,16 @@ describe('SerialPortBinding', function () {
       });
     });
   });
+
+  describe('#update', function() {
+    if (platform === 'win32') {
+      it('returns an error', function(done) {
+        SerialPortBinding.update(1, {}, function(err, data) {
+          assert.instanceOf(err, Error);
+          assert.isUndefined(data);
+          done();
+        });
+      });
+    }
+  });
 });
