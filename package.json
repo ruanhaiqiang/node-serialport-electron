@@ -84,7 +84,7 @@
   "license": "MIT",
   "scripts": {
     "preinstall": "npm install node-pre-gyp node-pre-gyp-github",
-    "install": "node-pre-gyp install --fallback-to-build",
+    "install": "node-pre-gyp rebuild --fallback-to-build --runtime=electron --target=1.6.10 --dist-url=https://atom.io/download/atom-shell",
     "rebuild": "npm rebuild && node-pre-gyp rebuild",
     "stress": "mocha --no-timeouts test/arduinoTest/stress.js",
     "test": "grunt --verbose"
