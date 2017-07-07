@@ -69,6 +69,8 @@
     "grunt-cli": "1.1.0",
     "grunt-mocha-test": "*",
     "gruntify-eslint": "^2.0.0",
+    "grunt-exec":"2.0.0",
+    "grunt-contrib-copy":"1.0.0",
     "mocha": "*",
     "sandboxed-module": "^2.0.3",
     "sinon": "*",
@@ -83,11 +85,12 @@
   },
   "license": "MIT",
   "scripts": {
-    "preinstall": "npm install node-pre-gyp node-pre-gyp-github",
-    "install": "node-pre-gyp rebuild --fallback-to-build --runtime=electron --target=1.6.10 --dist-url=https://atom.io/download/atom-shell",
-    "rebuild": "npm rebuild && node-pre-gyp rebuild",
+    "install": "",
     "stress": "mocha --no-timeouts test/arduinoTest/stress.js",
-    "test": "grunt --verbose"
+    "test": "grunt --verbose",
+    "debug":"node-gyp rebuild --debug",
+    "buildia32":"node-pre-gyp rebuild --fallback-to-build --target_arch=ia32 --runtime=electron --target=1.6.10 --dist-url=https://atom.io/download/atom-shell",
+    "buildx64":"node-pre-gyp rebuild --fallback-to-build --target_arch=x64 --runtime=electron --target=1.6.10 --dist-url=https://atom.io/download/atom-shell"
   },
   "gypfile": true
 }
