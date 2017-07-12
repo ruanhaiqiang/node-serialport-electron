@@ -1,6 +1,6 @@
 {
   "name": "serialport",
-  "version": "2.1.0",
+  "version": "4.0.7",
   "description": "Node.js package to access serial ports. Welcome your robotic javascript overlords. Better yet, program them!",
   "author": {
     "name": "Chris Williams",
@@ -10,16 +10,19 @@
   "binary": {
     "module_name": "serialport",
     "module_path": "build/{configuration}/",
-    "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
-    "host": "https://github.com/voodootikigod/node-serialport/releases/download/2.1.0"
+    "host": "https://github.com/EmergingTechnologyAdvisors/node-serialport/releases/download/4.0.7"
   },
   "main": "./lib/serialport",
   "repository": {
     "type": "git",
-    "url": "git://github.com/voodootikigod/node-serialport.git"
+    "url": "git://github.com/EmergingTechnologyAdvisors/node-serialport.git"
   },
   "keywords": [
     "serialport",
+    "johnny-five",
+    "serial port",
+    "hardware",
+    "iot",
     "nodebots"
   ],
   "maintainers": [
@@ -49,48 +52,56 @@
     }
   ],
   "dependencies": {
-    "async": "0.9.0",
     "bindings": "1.2.1",
-    "debug": "^2.1.1",
-    "nan": "~2.2.1",
-    "node-pre-gyp": "0.6.x",
-    "node-pre-gyp-github": "^1.1.0",
-    "object.assign": "^4.0.3",
-    "optimist": "~0.6.1",
-    "sf": "0.1.7"
+    "commander": "^2.9.0",
+    "debug": "^2.3.2",
+    "lie": "^3.1.0",
+    "nan": "^2.4.0",
+    "node-pre-gyp": "^0.6.32",
+    "object.assign": "^4.0.3"
   },
   "devDependencies": {
-    "chai": "*",
+    "chai": "^3.5.0",
     "chai-subset": "^1.2.2",
+    "coveralls": "^2.11.9",
     "eslint-config-standard": "^5.1.0",
     "eslint-plugin-promise": "^1.1.0",
     "eslint-plugin-standard": "^1.3.2",
-    "grunt": "0.4.5",
-    "grunt-cli": "1.1.0",
-    "grunt-mocha-test": "*",
+    "grunt": "^1.0.0",
+    "grunt-mocha-test": "^0.12.7",
     "gruntify-eslint": "^2.0.0",
-    "grunt-exec":"2.0.0",
-    "grunt-contrib-copy":"1.0.0",
-    "mocha": "*",
+    "mocha": "^2.4.5",
+    "node-pre-gyp-github": "^1.1.2",
+    "nyc": "^6.4.4",
     "sandboxed-module": "^2.0.3",
-    "sinon": "*",
-    "sinon-chai": "*"
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0"
   },
+  "bundledDependencies": [
+    "node-pre-gyp"
+  ],
   "engines": {
     "node": ">= 0.10.0"
   },
   "bin": {
-    "serialportlist": "./bin/serialportList.js",
-    "serialportterm": "./bin/serialportTerminal.js"
+    "serialport-list": "./bin/serialport-list.js",
+    "serialport-term": "./bin/serialport-terminal.js"
   },
   "license": "MIT",
   "scripts": {
-    "install": "",
+    "install": "node-pre-gyp install --fallback-to-build",
+    "rebuild-all": "npm rebuild && node-gyp rebuild",
+    "gyp-rebuild": "node-gyp rebuild",
     "stress": "mocha --no-timeouts test/arduinoTest/stress.js",
-    "test": "grunt --verbose",
-    "debug":"node-gyp rebuild --debug",
+    "integration": "mocha test/arduinoTest/integration.js test/integration-lite.js",
+    "grunt": "grunt",
+    "lint": "grunt --verbose lint",
+    "test": "nyc grunt --verbose test",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "valgrind": "valgrind --leak-check=full --show-possibly-lost=no node --expose-gc --trace-gc node_modules/.bin/grunt test",
     "buildia32":"node-pre-gyp rebuild --fallback-to-build --target_arch=ia32 --runtime=electron --target=1.6.10 --dist-url=https://atom.io/download/atom-shell",
     "buildx64":"node-pre-gyp rebuild --fallback-to-build --target_arch=x64 --runtime=electron --target=1.6.10 --dist-url=https://atom.io/download/atom-shell"
+
   },
   "gypfile": true
 }

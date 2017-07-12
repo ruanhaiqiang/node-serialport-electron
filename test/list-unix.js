@@ -1,7 +1,6 @@
 'use strict';
 
-var chai = require('chai');
-var expect = chai.expect;
+var assert = require('chai').assert;
 var listUnix = require('./mocks/list-unix');
 
 var ports = {
@@ -87,7 +86,7 @@ var portOutput = [
   }
 ];
 
-describe('listUnix', function () {
+describe('listUnix', function() {
   beforeEach(function() {
     listUnix.reset();
   });
@@ -95,8 +94,18 @@ describe('listUnix', function () {
   it('lists available serialports', function(done) {
     listUnix.setPorts(ports);
     listUnix(function(err, ports) {
-      expect(err).to.not.be.ok;
-      expect(ports).to.deep.equal(portOutput);
+      assert.isNull(err);
+      assert.deepEqual(ports, portOutput);
+      done();
+    });
+  });
+
+  it('does not list non character devices', function(done) {
+    listUnix.setCharacterDevice(false);
+    listUnix.setPorts(ports);
+    listUnix(function(err, ports) {
+      assert.isNull(err);
+      assert.deepEqual(ports, []);
       done();
     });
   });
@@ -104,7 +113,7 @@ describe('listUnix', function () {
   it('returns an error to callback', function(done) {
     listUnix.error(true);
     listUnix(function(err) {
-      expect(err).to.be.ok;
+      assert.instanceOf(err, Error);
       done();
     });
   });

@@ -5,6 +5,7 @@
 var SandboxedModule = require('sandboxed-module');
 
 var mockPorts = {};
+var characterDevice = true;
 var error = false;
 
 var listUnix = SandboxedModule.require('../../lib/list-unix', {
@@ -12,12 +13,18 @@ var listUnix = SandboxedModule.require('../../lib/list-unix', {
     fs: {
       readdir: function(path, cb) {
         if (error) {
-          return process.nextTick(cb.bind(null, new Error('bad')));
+          return process.nextTick(function() {
+            cb(new Error('bad'));
+          });
         }
-        process.nextTick(cb.bind(null, null, Object.keys(mockPorts)));
+        process.nextTick(function() {
+          cb(null, Object.keys(mockPorts));
+        });
       },
-      statSync: function() {
-        return { isCharacterDevice: function() { return true } };
+      stat: function(path, cb) {
+        process.nextTick(function() {
+          cb(null, { isCharacterDevice: function() { return characterDevice } });
+        });
       }
     },
     path: {
@@ -37,6 +44,10 @@ var listUnix = SandboxedModule.require('../../lib/list-unix', {
   }
 });
 
+listUnix.setCharacterDevice = function(isCharacterDevice) {
+  characterDevice = isCharacterDevice;
+};
+
 listUnix.setPorts = function(ports) {
   mockPorts = ports;
 };
@@ -48,6 +59,7 @@ listUnix.error = function(err) {
 listUnix.reset = function() {
   error = false;
   mockPorts = {};
+  characterDevice = true;
 };
 
 module.exports = listUnix;
