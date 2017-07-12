@@ -12,7 +12,6 @@ test/
 
 # MIRRORED FROM .gitignore PLEASE MAINTAIN
 .lock-wscript
-*.node
 .DS_Store
 build/
 node_modules
