@@ -2,17 +2,6 @@
   "name": "serialport",
   "version": "2.1.0",
   "description": "Node.js package to access serial ports. Welcome your robotic javascript overlords. Better yet, program them!",
-  "author": {
-    "name": "Chris Williams",
-    "email": "voodootikigod@gmail.com",
-    "url": "http://www.voodootikigod.com"
-  },
-  "binary": {
-    "module_name": "serialport",
-    "module_path": "build/{configuration}/",
-    "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
-    "host": "https://github.com/voodootikigod/node-serialport/releases/download/2.1.0"
-  },
   "main": "./lib/serialport",
   "repository": {
     "type": "git",
@@ -21,32 +10,6 @@
   "keywords": [
     "serialport",
     "nodebots"
-  ],
-  "maintainers": [
-    {
-      "name": "Jacob Rosenthal",
-      "email": "jakerosenthal@gmail.com"
-    },
-    {
-      "name": "Chris Williams",
-      "email": "voodootikigod@gmail.com"
-    },
-    {
-      "name": "Joe Ferner",
-      "email": "joe.ferner@nearinfinity.com"
-    },
-    {
-      "name": "Jay Beavers",
-      "email": "jay@hikinghomeschoolers.org"
-    },
-    {
-      "name": "Rob Giseburt",
-      "email": "giseburt@gmail.com"
-    },
-    {
-      "name": "Francis Gulotta",
-      "email": "wizard@roborooter.com"
-    }
   ],
   "dependencies": {
     "async": "0.9.0",
