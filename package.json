@@ -2,20 +2,15 @@
   "name": "serialport",
   "version": "4.0.7",
   "description": "Node.js package to access serial ports. Welcome your robotic javascript overlords. Better yet, program them!",
-  "author": {
-    "name": "Chris Williams",
-    "email": "voodootikigod@gmail.com",
-    "url": "http://www.voodootikigod.com"
-  },
-  "binary": {
-    "module_name": "serialport",
-    "module_path": "build/{configuration}/",
-    "host": "https://github.com/EmergingTechnologyAdvisors/node-serialport/releases/download/4.0.7"
-  },
   "main": "./lib/serialport",
   "repository": {
     "type": "git",
     "url": "git://github.com/EmergingTechnologyAdvisors/node-serialport.git"
+  },
+  "binary": {
+    "module_name": "serialport",
+    "module_path": "build/{configuration}/",
+    "host": ""
   },
   "keywords": [
     "serialport",
@@ -24,32 +19,6 @@
     "hardware",
     "iot",
     "nodebots"
-  ],
-  "maintainers": [
-    {
-      "name": "Jacob Rosenthal",
-      "email": "jakerosenthal@gmail.com"
-    },
-    {
-      "name": "Chris Williams",
-      "email": "voodootikigod@gmail.com"
-    },
-    {
-      "name": "Joe Ferner",
-      "email": "joe.ferner@nearinfinity.com"
-    },
-    {
-      "name": "Jay Beavers",
-      "email": "jay@hikinghomeschoolers.org"
-    },
-    {
-      "name": "Rob Giseburt",
-      "email": "giseburt@gmail.com"
-    },
-    {
-      "name": "Francis Gulotta",
-      "email": "wizard@roborooter.com"
-    }
   ],
   "dependencies": {
     "bindings": "1.2.1",
@@ -89,7 +58,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "install": "node-pre-gyp install --fallback-to-build",
+    "install": "",
     "rebuild-all": "npm rebuild && node-gyp rebuild",
     "gyp-rebuild": "node-gyp rebuild",
     "stress": "mocha --no-timeouts test/arduinoTest/stress.js",
@@ -99,8 +68,9 @@
     "test": "nyc grunt --verbose test",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "valgrind": "valgrind --leak-check=full --show-possibly-lost=no node --expose-gc --trace-gc node_modules/.bin/grunt test",
-    "buildia32":"node-pre-gyp rebuild --fallback-to-build --target_arch=ia32 --runtime=electron --target=1.6.10 --dist-url=https://atom.io/download/atom-shell",
-    "buildx64":"node-pre-gyp rebuild --fallback-to-build --target_arch=x64 --runtime=electron --target=1.6.10 --dist-url=https://atom.io/download/atom-shell"
+    "build":"node-gyp rebuild --fallback-to-build",
+    "buildia32":"node-gyp rebuild --fallback-to-build --target_arch=ia32 --runtime=electron --target=1.6.10 --dist-url=https://atom.io/download/atom-shell",
+    "buildx64":"node-gyp rebuild --fallback-to-build --target_arch=x64 --runtime=electron --target=1.6.10 --dist-url=https://atom.io/download/atom-shell"
 
   },
   "gypfile": true
