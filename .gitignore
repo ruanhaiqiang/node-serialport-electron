@@ -1,6 +1,5 @@
 # MAKE SURE ALL ADDITIONS HERE ARE MIRRORED INTO THE .npmignore AS WELL
 .lock-wscript
-*.node
 .DS_Store
 build/
 node_modules
